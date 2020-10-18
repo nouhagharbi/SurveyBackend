@@ -1,5 +1,9 @@
+import { type } from "os";
 import { from } from "rxjs";
 import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert} from "typeorm";
+import { User, UserRole } from "./user.interface";
+
+
 
 
 @Entity()
@@ -19,6 +23,9 @@ export class UserEntity{
 
     @Column()
     password: string;
+
+    @Column({type: 'enum', enum: UserRole, default: UserRole.USER})
+    role: UserRole;
 
     @BeforeInsert()
     emailToLowerCase() {
